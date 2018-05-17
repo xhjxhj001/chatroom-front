@@ -3,8 +3,8 @@
     <view class="userinfo">
         <button wx:if="{{!hasUserInfo}}" size="mini" type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
         <block wx:else>
-            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-            <text class="">{{userInfo.nickName}}</text>
+            <image class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover"></image>
+            <text class="">{{userInfo.name}}</text>
         </block>
 
         <view>

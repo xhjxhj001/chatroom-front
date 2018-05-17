@@ -3,15 +3,7 @@
 const app = getApp()
 App({
     onLaunch: function () {
-        console.log('launch');// 小程序启动之后 触发
-        wx.showLoading({
-            title: '加载中',
-            mask: true
-
-        });
-        setTimeout(function(){
-            wx.hideLoading()
-        },2000)
+        console.log('launch');// 小程序启动之后 触发       
     }
 })
 
@@ -35,34 +27,63 @@ function getSignList (that) {
     })
 }
 
+/**
+ * 获取用户信息
+ */
+function getUser(that) {
+  wx.login({
+    success: function (res) {
+      if (res.code) {
+        //发起网络请求
+        wx.request({
+          url: 'https://www.wanghaishu.com/user',
+          method: 'GET',
+          data: {
+            code: res.code
+          },
+          success: function (ret) {
+            if (ret.data.errno === 0) {
+              console.log(ret.data.data);
+              app.globalData.userInfo = ret.data.data;
+              app.globalData.openid = ret.data.data.openid;
+              that.setData({
+                userInfo: app.globalData.userInfo,
+                hasUserInfo: true,
+              });
+            }
+          }
+        })
+      } else {
+        console.log('登录失败！' + res.errMsg)
+      }
+    }
+  })
+}
+
 Page({
     data : {
         hasUserInfo: false,
         hasSignUp: false,
-        userInfo : null,
+        userInfo: app.globalData.userInfo,
         openid : app.globalData.openid,
         signlist: null
     },
     onLoad: function() {
-        if (app.globalData.userInfo) {
-            this.setData({
-                userInfo: app.globalData.userInfo,
-                hasUserInfo: true
-            })
-        } else{
-            // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-            // 所以此处加入 callback 以防止这种情况
-            app.userInfoReadyCallback = res => {
-                this.setData({
-                    userInfo: res.userInfo,
-                    hasUserInfo: true
-                })
-            }
-        }
         var that = this;
+        getUser(that);
+        wx.showLoading({
+          title: '加载中',
+          mask: true
+
+        });
+        setTimeout(function () {
+          wx.hideLoading();
+        }, 2000);
+
         getSignList(that);
     },
     getUserInfo: function (e) {
+        var that = this;
         console.log(e);
         wx.login({
             success: function(res) {
