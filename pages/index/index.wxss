@@ -1,0 +1,78 @@
+/**index.wxss**/
+.container {
+  font-size: 11pt;
+  height: 100%;
+  justify-content: space-between;
+  padding: 50rpx 0;
+  box-sizing: border-box;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sign-up {
+  margin-top: 100rpx
+}
+
+.author {
+  color: #aaa;
+  display: flex;
+  flex-direction: column;
+  margin-left: 100rpx;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 100px;
+}
+
+
+.signlist{
+    size: 10rpx;
+    margin-left: 50rpx;
+    margin-right: 50rpx;
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    border-bottom-width: 5rpx;
+    border-bottom-style: solid;
+    border-bottom-color: darkgreen;
+}
+
+.signlist.title view{
+    margin-left: 50rpx;
+}
+
+.signlist .flex-item{
+    justify-content: space-around;
+    margin: 20rpx;
+}
+
+.signlist-no {
+}
+
+.signlist-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+
+.signlist-name {
+}
+
+.signlist-ctime {
+    font-size: 10pt;
+}
